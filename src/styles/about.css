@@ -1,8 +1,3 @@
-/* ================================================
-   ABOUT US PAGE STYLES - UPDATED VERSION
-   ================================================ */
-
-/* Hero Image Section */
 .hero-image-section {
     width: 100%;
     padding: 0;
@@ -26,6 +21,11 @@
     display: block;
 }
 
+.about-who-we-are {
+    background: white;
+    padding: 72px 0 36px;
+}
+
 /* History Timeline Section */
 .history-section {
     padding: 60px 0 80px;
@@ -34,7 +34,7 @@
 }
 
 .history-section h2 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 48px;
     font-weight: 700;
     color: #001f54;
@@ -180,6 +180,29 @@
     margin-top: 10px;
 }
 
+.about-quote {
+    margin-top: 24px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-left: 4px solid #FFB81C;
+    border-radius: 5px;
+}
+
+.about-quote em {
+    display: block;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.about-quote strong {
+    display: block;
+    font-size: 15px;
+    color: #001f54;
+}
+
 /* Leadership History Section */
 .leadership-history {
     margin-top: 40px;
@@ -187,7 +210,7 @@
 }
 
 .leadership-history h3 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 24px;
     color: #001f54;
     margin-bottom: 20px;
@@ -210,7 +233,7 @@
 }
 
 .section-title {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 42px;
     font-weight: 400;
     color: #001f54;
@@ -219,7 +242,7 @@
 }
 
 .section-subtitle {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 18px;
     font-weight: 400;
     color: #333;
@@ -234,13 +257,23 @@
 }
 
 .category-title {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 24px;
     font-weight: 400;
     color: #001f54;
     text-align: center;
     margin-bottom: 30px;
     padding-bottom: 10px;
+}
+
+.faculty-group-note {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    text-align: center;
+    max-width: 760px;
+    margin: -10px auto 25px;
+    font-family: 'Lato', sans-serif;
 }
 
 /* Container for centering content */
@@ -283,6 +316,15 @@
     object-fit: cover;
 }
 
+.board-member .member-image img.faculty-photo-center {
+    display: block;
+    object-position: center center !important;
+}
+
+.board-member .member-image img.anna-photo {
+    object-position: 50% 24% !important;
+}
+
 .board-member h3 {
     font-size: 16px;
     font-weight: 600;
@@ -305,6 +347,16 @@
     gap: 20px;
     max-width: 800px;
     margin: 0 auto;
+}
+
+/* Presidents Grid - Centered display for Co-Presidents */
+.presidents-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .liaison-member {
@@ -364,6 +416,11 @@
     margin: 0 auto;
 }
 
+.faculty-photo-grid {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 1125px;
+}
+
 /* Center resource grid when it has 3 members (for Communications section) */
 .resource-grid:has(.resource-member:nth-child(3):last-child) {
     justify-content: center;
@@ -396,6 +453,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.resource-member .member-image img.faculty-photo-center {
+    display: block;
+    object-position: center center !important;
+}
+
+.resource-member .member-image img.anna-photo {
+    object-position: 50% 24% !important;
 }
 
 .resource-member .member-image svg {
@@ -579,6 +645,66 @@
     font-family: 'Lato', sans-serif;
 }
 
+.liaison-committee-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px 36px;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.liaison-committee-group {
+    text-align: left;
+    padding: 0;
+}
+
+.liaison-committee-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #001f54;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #d9e4f2;
+    font-family: 'Lato', sans-serif;
+}
+
+.liaison-committee-group .names-only-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+}
+
+.liaison-committee-group .name-item {
+    min-width: 0;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-align: left;
+}
+
+.liaison-committee-group .name-item:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: transparent;
+    background: transparent;
+}
+
+.liaison-committee-group .name-item h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.liaison-committee-group .name-item p {
+    margin-top: 2px;
+}
+
 /* ================================================
    VOLUNTEERS SECTION
    ================================================ */
@@ -589,7 +715,7 @@
 }
 
 .volunteers-title {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 32px;
     font-weight: 400;
     color: #001f54;
@@ -618,7 +744,7 @@
 }
 
 .school-link p {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 17px;
     font-weight: 400;
     color: #333;
@@ -646,7 +772,7 @@
 }
 
 .volunteers-message p {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 18px;
     font-weight: 400;
     color: #333;
@@ -765,6 +891,11 @@ footer p {
         gap: 20px;
     }
 
+    .faculty-photo-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 675px;
+    }
+
     /* Events & Education Grid - 2 columns on tablet */
     .events-education-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -865,6 +996,11 @@ footer p {
     .resource-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
+    }
+
+    .faculty-photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 430px;
     }
 
     .resource-member .member-image {
