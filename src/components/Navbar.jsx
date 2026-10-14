@@ -85,6 +85,7 @@ function Navbar() {
               <ul className="submenu">
                 <li><Link to="/orientation" onClick={closeMobileMenu}>Street Rounds</Link></li>
                 <li><Link to="/volunteer" onClick={closeMobileMenu}>Get Involved</Link></li>
+                <li><Link to="/meals-that-matter" onClick={closeMobileMenu}>Meals That Matter</Link></li>
               </ul>
             </li>
             

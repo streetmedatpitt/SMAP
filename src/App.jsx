@@ -11,6 +11,7 @@ import Resources from './pages/Resources';
 import Events from './pages/Events';
 import Orientation from './pages/Orientation';
 import Volunteer from './pages/Volunteer';
+import MealsThatMatter from './pages/MealsThatMatter';
 
 import './styles/reset.css';
 import './styles/navbar.css';
@@ -24,6 +25,7 @@ import './styles/resources.css';
 import './styles/events.css';
 import './styles/get_involved.css';
 import './styles/volunteer.css';
+import './styles/meals-that-matter.css';
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/orientation" element={<Orientation />} />
+        <Route path="/meals-that-matter" element={<MealsThatMatter />} />
         <Route path="/projects" element={<ProjectsArticles />} />
       </Routes>
       <Footer />
