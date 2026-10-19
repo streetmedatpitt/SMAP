@@ -12,6 +12,8 @@ import Events from './pages/Events';
 import Orientation from './pages/Orientation';
 import Volunteer from './pages/Volunteer';
 import MealsThatMatter from './pages/MealsThatMatter';
+import Highlights from './pages/Highlights';
+import EventDetail from './pages/EventDetail';
 
 import './styles/reset.css';
 import './styles/navbar.css';
@@ -26,6 +28,7 @@ import './styles/events.css';
 import './styles/get_involved.css';
 import './styles/volunteer.css';
 import './styles/meals-that-matter.css';
+import './styles/highlights.css';
 
 function App() {
   return (
@@ -35,10 +38,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/highlights" element={<Highlights />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetail />} />
+        <Route path="/event/:id" element={<EventDetail />} />
         <Route path="/volunteer" element={<Volunteer />} />
         <Route path="/orientation" element={<Orientation />} />
         <Route path="/meals-that-matter" element={<MealsThatMatter />} />

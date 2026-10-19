@@ -847,8 +847,9 @@ function About() {
             </p>
           </div>
 
-          <div className="cta-section">
+          <div className="cta-section" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/volunteer" className="btn btn-primary">Get Involved</Link>
+            <Link to="/highlights" className="btn btn-secondary">View Highlights &amp; Recognitions &rarr;</Link>
           </div>
         </div>
       </section>

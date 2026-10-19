@@ -2,9 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MetricCard from '../components/MetricCard';
 import { DISCIPLINES } from '../utils/disciplines';
+import { getUpcomingEvents } from '../data/eventsData';
 
 function Home() {
   const [activeFaq, setActiveFaq] = useState(null);
+  const [winterShelterSlide, setWinterShelterSlide] = useState(0);
+  const [expandedHighlight, setExpandedHighlight] = useState(null);
+
+  const upcomingEvents = getUpcomingEvents(3);
 
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
@@ -12,6 +17,10 @@ function Home() {
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index);
+  };
+
+  const toggleHighlight = (index) => {
+    setExpandedHighlight(expandedHighlight === index ? null : index);
   };
 
   const faqData = [
@@ -173,9 +182,9 @@ function Home() {
 
             {/* CTA Buttons */}
             <div className="cta-buttons">
-              <a href="/resources" className="btn btn-primary">View Resources</a>
-              <a href="/donate" className="btn btn-secondary">Support Us</a>
-              <a href="/volunteer" className="btn btn-tertiary">Join Our Team</a>
+              <Link to="/resources" className="btn btn-primary">View Resources</Link>
+              <Link to="/donate" className="btn btn-secondary">Support Us</Link>
+              <Link to="/volunteer" className="btn btn-tertiary">Join Our Team</Link>
             </div>
           </div>
         </div>
@@ -221,45 +230,224 @@ function Home() {
         </div>
       </section>
 
-      {/* Who We Are Section */}
-      <section className="what-we-do-photos">
-        <div className="container two-col-photos">
-          <div className="photos-text">
-            <h2 className="section-header">Who We Are</h2>
-            <div className="section-underline"></div>
-            <p className="lead">
-              Street Medicine at Pitt is a student-run organization dedicated to bringing compassionate,
-              person-centered healthcare directly to those experiencing homelessness in Pittsburgh.
-              We believe that access to care is a human right — and that meaningful change begins
-              with trust, respect, and presence.
-            </p>
-            <p className="lead">
-              Our team of students, clinicians, and community partners works together to reduce
-              barriers to healthcare, advocate for social equity, and build sustainable relationships
-              that extend beyond a single encounter. Every week, we meet individuals where they are —
-              in encampments, shelters, and on the streets — offering medical care, connection, and dignity.
-            </p>
+      {/* Upcoming Events Section (Dynamically Powered) */}
+      <section className="upcoming-events-section">
+        <div className="container">
+          <div className="section-block-header">
+            <h2>Upcoming Events</h2>
+          </div>
+          <div className="announcements-grid" id="home-upcoming-events-grid">
+            {upcomingEvents && upcomingEvents.length > 0 ? (
+              upcomingEvents.map((event) => (
+                <article key={event.id} className="announcement-card">
+                  <div className="announcement-media">
+                    <img 
+                      src={event.image} 
+                      alt={event.title} 
+                      loading="lazy" 
+                      onError={(e) => { e.currentTarget.src = event.fallbackImage || '/Content/Events/bridge.jpg'; }} 
+                    />
+                  </div>
+                  <div className="announcement-content">
+                    <div className="announcement-date">
+                      {event.displayDate || `${event.date?.day} ${event.date?.month}`}
+                    </div>
+                    <h3>{event.title}</h3>
+                    <p>{event.shortDescription || event.description}</p>
+                    <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', flexWrap: 'wrap' }}>
+                      <Link to={`/events/${event.id}`} className="announcement-button">
+                        RSVP &amp; Details &rarr;
+                      </Link>
+                      {event.rsvpUrl && (
+                        <a 
+                          href={event.rsvpUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="announcement-button" 
+                          style={{ background: '#003594', color: 'white' }}
+                        >
+                          {event.rsvpLabel || 'RSVP via Google Form'} &rarr;
+                        </a>
+                      )}
+                      {event.zoomUrl && (
+                        <a 
+                          href={event.zoomUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="announcement-button" 
+                          style={{ background: '#003594', color: 'white' }}
+                        >
+                          {event.zoomLabel || 'Join Meeting \u2192'}
+                        </a>
+                      )}
+                      {event.groupMeUrl && (
+                        <a 
+                          href={event.groupMeUrl} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="announcement-button" 
+                          style={{ background: '#008542', color: 'white' }}
+                        >
+                          Join GroupMe &rarr;
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              <div style={{
+                gridColumn: '1 / -1',
+                textAlign: 'center',
+                padding: '40px 20px',
+                background: '#f8fbff',
+                border: '1px dashed #c7d9fc',
+                borderRadius: '16px'
+              }}>
+                <h3 style={{ color: '#001f54', fontSize: '20px', marginBottom: '8px' }}>
+                  No events scheduled in the next 30 days
+                </h3>
+                <p style={{ color: '#64748b', fontSize: '15px', margin: '0 0 20px 0' }}>
+                  Check our full calendar for future workshops, lectures, and community events.
+                </p>
+                <Link to="/events" className="btn btn-secondary" style={{ display: 'inline-block' }}>
+                  Explore Full Calendar
+                </Link>
+              </div>
+            )}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '36px' }}>
+            <Link to="/events" className="btn btn-tertiary">
+              View All Events &amp; Calendar &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Section (Highlights) */}
+      <section className="what-we-do-section featured-section">
+        <div className="container">
+          <h2 className="section-header">Highlights</h2>
+          <div className="section-underline"></div>
+          <div className="services-grid">
+            {/* Highlight 1: Arabella Johnson */}
+            <div className="service-card">
+              <div className="featured-media">
+                <img 
+                  src="/Content/Home/ArabellaProjectPresention.png"
+                  alt="Arabella Johnson presenting her project on menstrual health needs" 
+                  loading="lazy"
+                  className="featured-image-lower"
+                  onError={(e) => { e.currentTarget.src = '/Content/About us/Arabella-Johnson.JPG'; }}
+                />
+              </div>
+              <div className={`featured-copy ${expandedHighlight === 0 ? 'is-expanded' : ''}`}>
+                <h3>Health Equity</h3>
+                <p className="featured-description">
+                  <span>Street Medicine at Pitt is proud to recognize Arabella Johnson (MPH BCHS &apos;26), who received the Director&apos;s Award.</span>
+                  {expandedHighlight === 0 && (
+                    <span className="featured-description-extra">
+                      {' '}The recognition came at the University of Pittsburgh School of Public Health&apos;s annual Public Health Practice Showcase this past December. Her project, &quot;Centering Community Voice: Addressing Menstrual Health Needs Among Women Experiencing Homelessness in Pittsburgh, PA,&quot; used community narratives to better understand and assess menstrual health needs in our area. Based on that feedback, Arabella prepared and distributed menstrual health kits informed directly by participant responses. We are grateful for her leadership, advocacy, and continued commitment to our community.
+                    </span>
+                  )}
+                </p>
+                <button 
+                  type="button" 
+                  className="featured-toggle" 
+                  aria-expanded={expandedHighlight === 0}
+                  onClick={() => toggleHighlight(0)}
+                >
+                  {expandedHighlight === 0 ? 'Show less' : 'Read more'}
+                </button>
+              </div>
+            </div>
+
+            {/* Highlight 2: Winter Shelter Outreach */}
+            <div className="service-card">
+              <div className="featured-media">
+                <div className="featured-carousel" aria-label="Winter Shelter Outreach photo gallery">
+                  <div className="featured-carousel-track">
+                    <div className={`featured-carousel-slide ${winterShelterSlide === 0 ? 'active' : ''}`}>
+                      <img 
+                        src="/Content/Home/wintershelterPic1.png"
+                        alt="SM@P team at the winter shelter outreach" 
+                        loading="lazy"
+                        className="featured-image-lower"
+                        onError={(e) => { e.currentTarget.src = '/Content/Home/team.jpg'; }}
+                      />
+                    </div>
+                    <div className={`featured-carousel-slide ${winterShelterSlide === 1 ? 'active' : ''}`}>
+                      <img 
+                        src="/Content/Home/wintershelterPic2.png"
+                        alt="SM@P vaccination clinic and triage care team at the winter shelter" 
+                        loading="lazy"
+                        className="featured-image-lower"
+                        onError={(e) => { e.currentTarget.src = '/Content/Home/team.jpg'; }}
+                      />
+                    </div>
+                  </div>
+                  <button 
+                    type="button" 
+                    className="featured-carousel-btn prev" 
+                    onClick={() => setWinterShelterSlide(prev => (prev === 0 ? 1 : 0))}
+                    aria-label="Previous Winter Shelter Outreach photo"
+                  >
+                    ‹
+                  </button>
+                  <button 
+                    type="button" 
+                    className="featured-carousel-btn next" 
+                    onClick={() => setWinterShelterSlide(prev => (prev === 1 ? 0 : 1))}
+                    aria-label="Next Winter Shelter Outreach photo"
+                  >
+                    ›
+                  </button>
+                </div>
+              </div>
+              <div className={`featured-copy ${expandedHighlight === 1 ? 'is-expanded' : ''}`}>
+                <h3>Winter Shelter Outreach</h3>
+                <p className="featured-description">
+                  <span>Throughout the winter months, Street Medicine at Pitt continues to care for people experiencing homelessness through winter outreach.</span>
+                  {expandedHighlight === 1 && (
+                    <span className="featured-description-extra">
+                      {' '}Operating from November through March, the winter shelter offers both a warm dinner and a safe place to sleep. Our clinicians, resident physicians, and student volunteers support the efforts of shelter staff by offering triage care and referrals for further medical care when necessary. Drs. Castelli and Klatt, also hosted a vaccination clinic while supporting medical coverage at the shelter. Note: As always, no patients are photographed, just our volunteer team.
+                    </span>
+                  )}
+                </p>
+                <button 
+                  type="button" 
+                  className="featured-toggle" 
+                  aria-expanded={expandedHighlight === 1}
+                  onClick={() => toggleHighlight(1)}
+                >
+                  {expandedHighlight === 1 ? 'Show less' : 'Read more'}
+                </button>
+              </div>
+            </div>
+
+            {/* Highlight 3: Law School Partnership */}
+            <div className="service-card">
+              <div className="featured-media">
+                <img 
+                  src="/Content/Home/lawStudentsPic1.png"
+                  alt="Street Medicine at Pitt team with Professor Mary Crossley and law school partners" 
+                  loading="lazy"
+                  onError={(e) => { e.currentTarget.src = '/Content/Home/team.jpg'; }}
+                />
+              </div>
+              <div className="featured-copy featured-copy-full">
+                <h3>Law School Partnership</h3>
+                <p className="featured-description">
+                  <span>We are collaborating with the Pitt Law School to expand advocacy and legal support for our community. This partnership began with Mary Crossley and is now led by Professor Tamara Pierson Brown, connecting law students with real-world service and community needs.</span>
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="photos-right-grid">
-            <figure className="tile tile-tall">
-              <img src="/Content/Volunteer/f87dd0d59820de4baebb8479a940b33a.jpg" alt="Prepping supplies before rounds" loading="lazy" />
-            </figure>
-            <figure className="tile">
-              <img src="/Content/Volunteer/048132af5e4a32730088f5f14b9e7ba4.jpg" alt="Street Rounds Photo 17" className="rightTopPhoto" loading="lazy" />
-            </figure>
-            <figure className="tile">
-              <img src="/Content/Volunteer/eaf1b7edfcb017b56e451276c2e5e1c9.jpg" alt="Street Rounds Photo 6" className="rightMiddlePhoto" loading="lazy" />
-            </figure>
-            <figure className="tile">
-              <img src="/Content/Volunteer/f4ee4a184900cb2237bd59eb967d843b.jpg" alt="Conversation and check-ins" loading="lazy" />
-            </figure>
-            <figure className="tile">
-              <img src="/Content/Volunteer/8a3425fc76a1229f0dfd4291a581d57a.jpg" alt="Street Rounds Photo 24" className="bottomMiddlePhoto" loading="lazy" />
-            </figure>
-            <figure className="tile">
-              <img src="/Content/Volunteer/fb0f25152860054a46f1a88364b0230d.jpg" alt="Warm clothing and hygiene kits" loading="lazy" />
-            </figure>
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <Link to="/highlights" className="btn btn-primary" style={{ display: 'inline-block' }}>
+              View All Highlights &rarr;
+            </Link>
           </div>
         </div>
       </section>

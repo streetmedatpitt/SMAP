@@ -159,14 +159,14 @@ function MealsThatMatter() {
                   <li className="process-step-item">
                     <div className="step-number">1</div>
                     <div className="step-details">
-                      <h4>Sign In &amp; Hygiene Prep (5:00 PM)</h4>
+                      <h4>Sign In &amp; Hygiene Prep (3:30 PM)</h4>
                       <p>Check in with our session coordinator, wash hands thoroughly, and suit up with provided gloves, aprons, and hairnets.</p>
                     </div>
                   </li>
                   <li className="process-step-item">
                     <div className="step-number">2</div>
                     <div className="step-details">
-                      <h4>Station Assembly Line (5:15 PM – 6:30 PM)</h4>
+                      <h4>Station Assembly Line (3:30 PM – 6:00 PM)</h4>
                       <p>Work alongside fellow students and community allies at bread, condiment, protein assembly, bagging, and labeling stations.</p>
                     </div>
                   </li>
@@ -225,7 +225,7 @@ function MealsThatMatter() {
                     </div>
                     <div className="fact-info">
                       <span className="fact-label">Prep Window</span>
-                      <span className="fact-value">5:00 PM – 7:00 PM</span>
+                      <span className="fact-value">3:30 PM – 6:00 PM</span>
                       <span className="fact-subtext">Flexible arrival shifts welcome</span>
                     </div>
                   </li>
@@ -238,8 +238,8 @@ function MealsThatMatter() {
                     </div>
                     <div className="fact-info">
                       <span className="fact-label">Location</span>
-                      <span className="fact-value">William Pitt Union</span>
-                      <span className="fact-subtext">Pittsburgh, PA 15260 (Room confirmed via email)</span>
+                      <span className="fact-value">SHRS Building</span>
+                      <span className="fact-subtext">3360 5th Ave, Pittsburgh, PA 15213</span>
                     </div>
                   </li>
                   <li className="fact-item">

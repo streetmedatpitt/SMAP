@@ -60,13 +60,14 @@
     background: white;
 }
 
-/* Three-card container for parallel layout */
+/* Multi-card container for parallel layout - 4 side by side */
 .donation-cards-wrapper {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 0 20px;
     align-items: stretch;
 }
 
@@ -111,8 +112,39 @@
     transition: transform 0.3s ease;
 }
 
-.donation-link:hover .donation-image {
+.donation-photo-frame {
+    width: calc(100% - 72px);
+    height: calc(100% - 72px);
+    max-height: 155px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.donation-photo-frame .donation-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    padding: 0 !important;
+    transition: transform 0.3s ease;
+}
+
+.donation-link:hover .donation-image,
+.donation-image-wrapper:hover .donation-image,
+.donation-image-wrapper:hover .donation-photo-frame .donation-photo {
     transform: scale(1.05);
+}
+
+.donation-image-wrapper:hover .donation-photo-frame {
+    border-color: #003594;
+    box-shadow: 0 4px 14px rgba(0, 31, 84, 0.15);
 }
 
 .donation-overlay {
@@ -129,7 +161,8 @@
     transition: opacity 0.3s ease;
 }
 
-.donation-link:hover .donation-overlay {
+.donation-link:hover .donation-overlay,
+.donation-image-wrapper:hover .donation-overlay {
     opacity: 1;
 }
 
@@ -149,7 +182,7 @@
 }
 
 .donation-content h2 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', serif;
     font-size: 32px;
     font-weight: 700;
     color: #001f54;
@@ -201,26 +234,13 @@
    RESPONSIVE STYLES
    ================================================ */
 
-/* Large Desktop - Keep 3 columns */
-@media (max-width: 1400px) {
-    .donation-cards-wrapper {
-        padding: 0 20px;
-    }
-}
-
-/* Tablet View - Switch to 2 columns */
-@media (max-width: 1024px) {
+/* Medium Screens / Tablet - Two rows of 2 */
+@media (max-width: 1150px) {
     .donation-cards-wrapper {
         grid-template-columns: repeat(2, 1fr);
-        max-width: 900px;
-    }
-    
-    /* Third card spans full width on smaller screens */
-    .donation-card:last-child {
-        grid-column: 1 / -1;
-        max-width: 450px;
-        margin: 0 auto;
-        width: 100%;
+        max-width: 860px;
+        gap: 28px;
+        padding: 0 20px;
     }
 }
 
@@ -244,13 +264,9 @@
 
     .donation-cards-wrapper {
         grid-template-columns: 1fr;
-        gap: 30px;
+        max-width: 480px;
+        gap: 28px;
         padding: 0;
-    }
-    
-    .donation-card:last-child {
-        grid-column: auto;
-        max-width: 100%;
     }
 
     .donation-content h2 {
@@ -281,6 +297,12 @@
         padding: 20px;
     }
 
+    .donation-photo-frame {
+        width: calc(100% - 48px);
+        height: calc(100% - 48px);
+        max-height: 135px;
+    }
+
     .donation-content {
         padding: 25px 20px;
     }
@@ -296,5 +318,412 @@
     .donation-content .btn {
         font-size: 14px;
         padding: 12px 25px;
+    }
+}
+
+/* ================================================
+   IN-KIND (CLOTHES & SUPPLIES) DONATION CARD & MODAL
+   ================================================ */
+
+.donation-icon-wrapper {
+    background: linear-gradient(135deg, #eef2fa 0%, #e2eafc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.supplies-icon-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.supplies-hero-icon {
+    width: 80px;
+    height: 80px;
+    color: #001f54;
+    transition: transform 0.3s ease;
+}
+
+.donation-card:hover .supplies-hero-icon {
+    transform: scale(1.1);
+    color: #003594;
+}
+
+.supplies-pill-badge {
+    background: #FFB81C;
+    color: #001f54;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+.btn-open-donation-modal {
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Modal Backdrop */
+.donation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 31, 84, 0.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.donation-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal Dialog */
+.donation-modal-dialog {
+    background: white;
+    width: 100%;
+    max-width: 680px;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+@keyframes modalSlideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    background: #001f54;
+    color: white;
+    padding: 24px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #FFB81C;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-family: 'Instrument Sans', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.modal-close-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 30px;
+}
+
+.modal-intro-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #475569;
+    margin: 0 0 24px 0;
+    background: #f8fafc;
+    padding: 14px 18px;
+    border-left: 4px solid #003594;
+    border-radius: 6px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #001f54;
+    margin-bottom: 8px;
+    font-family: 'Instrument Sans', Arial, sans-serif;
+}
+
+.form-label .required {
+    color: #e11d48;
+}
+
+.form-helper {
+    display: block;
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Lato', Arial, sans-serif;
+    color: #1e293b;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #003594;
+    box-shadow: 0 0 0 3px rgba(0, 53, 148, 0.12);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Checkbox Grid */
+.checkbox-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.checkbox-tile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #334155;
+    transition: all 0.2s ease;
+}
+
+.checkbox-tile:hover {
+    background: #eef2fa;
+    border-color: #cbd5e1;
+}
+
+.checkbox-tile input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #003594;
+}
+
+/* Delivery Method Radio Cards */
+.delivery-radios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.delivery-radio-card {
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    background: #ffffff;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: all 0.2s ease;
+}
+
+.delivery-radio-card:hover {
+    border-color: #003594;
+    background: #f8fafc;
+}
+
+.delivery-radio-card input[type="radio"] {
+    margin-top: 3px;
+    accent-color: #003594;
+    width: 18px;
+    height: 18px;
+}
+
+.delivery-radio-content h5 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #001f54;
+}
+
+.delivery-radio-content p {
+    margin: 0;
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+/* Two-column Input Row */
+.form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn-secondary-outline {
+    background: transparent;
+    color: #475569;
+    border: 1.5px solid #cbd5e1;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary-outline:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+.btn-submit-donation {
+    background: #FFB81C;
+    color: #001f54;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 184, 28, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-submit-donation:hover {
+    background: #ffcc4d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 184, 28, 0.6);
+}
+
+/* Success View */
+.donation-success-box {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.success-icon-badge {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #15803d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.success-icon-badge svg {
+    width: 36px;
+    height: 36px;
+}
+
+.donation-success-box h4 {
+    font-family: 'Instrument Sans', Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #001f54;
+    margin: 0 0 12px 0;
+}
+
+.donation-success-box p {
+    font-size: 15px;
+    color: #475569;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+.success-summary-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px 24px;
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.success-summary-card p {
+    font-size: 14px;
+    margin: 6px 0;
+    color: #334155;
+}
+
+@media (max-width: 640px) {
+    .checkbox-options-grid,
+    .delivery-radios-grid,
+    .form-row-2col {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-header {
+        padding: 18px 20px;
     }
 }

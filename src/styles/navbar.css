@@ -116,17 +116,42 @@
     top: 100%;
     left: 0;
     background: linear-gradient(135deg, #001f54 0%, #003594 100%);
-    min-width: 160px;
+    min-width: 180px;
     list-style: none;
-    padding: 5px 0;
+    padding: 6px 0;
     display: none;
-    box-shadow: 0 8px 16px rgba(0, 31, 84, 0.4);
-    border-radius: 0 0 8px 8px;
+    box-shadow: 0 10px 24px rgba(0, 31, 84, 0.45);
+    border-radius: 0 0 10px 10px;
     border-top: 2px solid #FFB81C;
+    z-index: 100000;
 }
 
-#navMenu li:hover > .submenu {
+#navMenu .submenu::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+}
+
+#navMenu li:hover > .submenu,
+#navMenu li:focus-within > .submenu {
     display: block;
+}
+
+/* Desktop dropdown indicator */
+#navMenu .has-submenu > a::after {
+    content: ' ▾';
+    font-size: 11px;
+    margin-left: 5px;
+    display: inline-block;
+    color: #FFB81C;
+    transition: transform 0.2s ease;
+}
+
+#navMenu .has-submenu:hover > a::after {
+    transform: rotate(180deg);
 }
 
 #navMenu .submenu li {

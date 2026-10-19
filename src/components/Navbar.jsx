@@ -41,6 +41,12 @@ function Navbar() {
         window.location.href = '/volunteer';
         return;
       }
+
+      if (menuName === 'About' && openSubmenu === 'About') {
+        // Second click on About - navigate to about page
+        window.location.href = '/about';
+        return;
+      }
       
       setOpenSubmenu(openSubmenu === menuName ? null : menuName);
     }
@@ -69,7 +75,19 @@ function Navbar() {
 
           <ul id="navMenu" className={mobileMenuOpen ? 'mobile-active' : ''}>
             <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
-            <li><Link to="/about" onClick={closeMobileMenu}>About Us</Link></li>
+            
+            <li className={`has-submenu ${openSubmenu === 'About' ? 'show-submenu' : ''}`}>
+              <Link 
+                to="/about" 
+                onClick={(e) => handleSubmenuClick(e, 'About')}
+              >
+                About Us
+              </Link>
+              <ul className="submenu">
+                <li><Link to="/about" onClick={closeMobileMenu}>About Us</Link></li>
+                <li><Link to="/highlights" onClick={closeMobileMenu}>Highlights</Link></li>
+              </ul>
+            </li>
             <li><Link to="/projects" onClick={closeMobileMenu}>Projects & Articles</Link></li>
             <li><Link to="/resources" onClick={closeMobileMenu}>Resources</Link></li>
             <li><Link to="/events" onClick={closeMobileMenu}>Events & Calendar</Link></li>
