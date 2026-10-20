@@ -133,6 +133,15 @@ function ProjectsArticles() {
   const articles = [
     {
       featured: true,
+      image: "/Content/Project_articles/News/Observer-Reporter.png",
+      source: "Observer-Reporter",
+      title: "WeCare Street Outreach team brings medical care to Washington's unhoused",
+      url: "/Content/Project_articles/News/Observer-Reporter-WeCare-Street-Outreach.pdf",
+      excerpt: "Highlights Pitt receiving a $2.5 million, five-year grant to expand street medicine residency training across Southwestern Pennsylvania, featuring Medical Director Dr. Anna Marie White.",
+      date: "October 17, 2026"
+    },
+    {
+      featured: false,
       image: "/Content/Project_articles/News/d2a3ad6f785979fec0fb6d94473ad241.jpg",
       source: "Pitt Med Magazine",
       title: "Street Medicine at Pitt serves Pittsburghers without homes — and educates future medical professionals",

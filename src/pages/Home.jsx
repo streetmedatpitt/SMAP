@@ -330,35 +330,44 @@ function Home() {
           <h2 className="section-header">Highlights</h2>
           <div className="section-underline"></div>
           <div className="services-grid">
-            {/* Highlight 1: Arabella Johnson */}
+            {/* Highlight 1: Meals That Matter */}
             <div className="service-card">
               <div className="featured-media">
                 <img 
-                  src="/Content/Home/ArabellaProjectPresention.png"
-                  alt="Arabella Johnson presenting her project on menstrual health needs" 
+                  src="/Content/Home/meals-that-matter-team.jpg"
+                  alt="Street Medicine at Pitt volunteers preparing meals during Meals That Matter prep" 
                   loading="lazy"
-                  className="featured-image-lower"
-                  onError={(e) => { e.currentTarget.src = '/Content/About us/Arabella-Johnson.JPG'; }}
+                  style={{ objectPosition: 'center 20%' }}
+                  onError={(e) => { e.currentTarget.src = '/Content/Volunteer/meals-that-matter-team.jpg'; }}
                 />
               </div>
               <div className={`featured-copy ${expandedHighlight === 0 ? 'is-expanded' : ''}`}>
-                <h3>Health Equity</h3>
+                <h3>Meals That Matter</h3>
                 <p className="featured-description">
-                  <span>Street Medicine at Pitt is proud to recognize Arabella Johnson (MPH BCHS &apos;26), who received the Director&apos;s Award.</span>
+                  <span>Every Wednesday, our volunteer team gathers to prepare fresh, nutritious meals and hydration packs that directly power our weekly outreach rounds.</span>
                   {expandedHighlight === 0 && (
                     <span className="featured-description-extra">
-                      {' '}The recognition came at the University of Pittsburgh School of Public Health&apos;s annual Public Health Practice Showcase this past December. Her project, &quot;Centering Community Voice: Addressing Menstrual Health Needs Among Women Experiencing Homelessness in Pittsburgh, PA,&quot; used community narratives to better understand and assess menstrual health needs in our area. Based on that feedback, Arabella prepared and distributed menstrual health kits informed directly by participant responses. We are grateful for her leadership, advocacy, and continued commitment to our community.
+                      {' '}From ingredient prep to packaging and labeling, student volunteers and community members collaborate in the kitchen to ensure unhoused neighbors receive nourishing, home-cooked food, comfort, and care across Pittsburgh.
                     </span>
                   )}
                 </p>
-                <button 
-                  type="button" 
-                  className="featured-toggle" 
-                  aria-expanded={expandedHighlight === 0}
-                  onClick={() => toggleHighlight(0)}
-                >
-                  {expandedHighlight === 0 ? 'Show less' : 'Read more'}
-                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', margin: '0 20px 18px', flexWrap: 'wrap' }}>
+                  <button 
+                    type="button" 
+                    className="featured-toggle" 
+                    aria-expanded={expandedHighlight === 0}
+                    onClick={() => toggleHighlight(0)}
+                    style={{ margin: 0 }}
+                  >
+                    {expandedHighlight === 0 ? 'Show less' : 'Read more'}
+                  </button>
+                  <Link 
+                    to="/meals-that-matter" 
+                    style={{ color: '#FFB81C', fontWeight: 700, fontSize: '15px', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+                  >
+                    Learn more &rarr;
+                  </Link>
+                </div>
               </div>
             </div>
 

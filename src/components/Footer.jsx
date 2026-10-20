@@ -24,7 +24,7 @@ function Footer() {
             </svg>
           </a>
         </div>
-        <p>&copy; 2025 Street Medicine at Pitt. All rights reserved.</p>
+        <p>&copy; 2026 Street Medicine at Pitt. All rights reserved.</p>
       </div>
     </footer>
   );

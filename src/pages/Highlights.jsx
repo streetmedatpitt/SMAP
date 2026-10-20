@@ -53,7 +53,7 @@ function Highlights() {
               <span className="spotlight-badge">Director's Award • Health Equity</span>
               <h3>Arabella Johnson (MPH BCHS &apos;26)</h3>
               <p>
-                Street Medicine at Pitt is immensely proud to recognize Arabella Johnson for receiving the prestigous <strong>Director&apos;s Award</strong> at the University of Pittsburgh School of Public Health&apos;s annual Public Health Practice Showcase.
+                Street Medicine at Pitt is immensely proud to recognize Arabella Johnson for receiving the prestigious <strong>Director&apos;s Award</strong> at the University of Pittsburgh School of Public Health&apos;s annual Public Health Practice Showcase.
               </p>
               <p>
                 Her project, <em>&quot;Centering Community Voice: Addressing Menstrual Health Needs Among Women Experiencing Homelessness in Pittsburgh, PA,&quot;</em> gathered firsthand community narratives to accurately assess the physical, emotional, and hygiene challenges unhoused individuals face.
@@ -64,8 +64,43 @@ function Highlights() {
             </div>
           </article>
 
-          {/* Spotlight 2: Winter Shelter Outreach */}
+          {/* Spotlight 2: Meals That Matter */}
           <article className="highlight-spotlight-card reverse">
+            <div className="spotlight-image-col">
+              <img 
+                src="/Content/Home/meals-that-matter-team.jpg" 
+                alt="Street Medicine at Pitt volunteers preparing food for Meals That Matter" 
+                loading="lazy"
+                style={{ objectPosition: 'center 20%' }}
+                onError={(e) => { e.currentTarget.src = '/Content/Volunteer/meals-that-matter-team.jpg'; }}
+              />
+            </div>
+            <div className="spotlight-text-col">
+              <span className="spotlight-badge">Nutrition &amp; Community • Weekly Outreach</span>
+              <h3>Meals That Matter Outreach Program</h3>
+              <p>
+                Proper nutrition is a cornerstone of recovery, healing, and human connection. Every Wednesday, Street Medicine at Pitt volunteers come together in the kitchen to prepare balanced, home-cooked meals, sandwich packs, and hydration kits that power our street rounds.
+              </p>
+              <p>
+                From sourcing ingredients to cooking, portioning, and hand-labeling containers, students across nutrition, medicine, public health, and other health disciplines work side-by-side to ensure unhoused neighbors receive nourishing food, warm comfort, and compassionate care.
+              </p>
+              <div className="spotlight-meta-box">
+                <strong>Weekly Community Impact:</strong> Over 100+ fresh, nutrient-dense meals and hydration packages prepared each week by volunteer teams and delivered directly to unsheltered individuals across Pittsburgh.
+              </div>
+              <div style={{ marginTop: '20px' }}>
+                <Link 
+                  to="/meals-that-matter" 
+                  className="btn btn-primary"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  Learn More &amp; Get Involved &rarr;
+                </Link>
+              </div>
+            </div>
+          </article>
+
+          {/* Spotlight 3: Winter Shelter Outreach */}
+          <article className="highlight-spotlight-card">
             <div className="spotlight-image-col">
               <img 
                 src="/Content/Home/wintershelterPic1.png" 
@@ -90,8 +125,8 @@ function Highlights() {
             </div>
           </article>
 
-          {/* Spotlight 3: Law School Partnership */}
-          <article className="highlight-spotlight-card">
+          {/* Spotlight 4: Law School Partnership */}
+          <article className="highlight-spotlight-card reverse">
             <div className="spotlight-image-col">
               <img 
                 src="/Content/Home/lawStudentsPic1.png" 
@@ -107,10 +142,53 @@ function Highlights() {
                 Healthcare and legal rights are deeply intertwined for individuals navigating housing instability. Street Medicine at Pitt proudly collaborates with the University of Pittsburgh School of Law to expand legal advocacy, identification assistance, and structural support.
               </p>
               <p>
-                This pioneering interprofessional initiative began in collaboration with <strong>Mary Crossley</strong> and is currently spearheaded by <strong>Professor Tamara Pierson Brown</strong>, providing law students with transformative real-world community service experiences.
+                This pioneering interprofessional initiative began in collaboration with <strong>Mary Crossley</strong> and is currently spearheaded by <strong>Professor Tamara Pierson Brown,</strong> providing law students with transformative real-world community service experiences.
               </p>
               <div className="spotlight-meta-box">
                 <strong>Holistic Support:</strong> Connecting students directly with unhoused neighbors to navigate disability benefits, civil documentation, and housing advocacy.
+              </div>
+            </div>
+          </article>
+
+          {/* Spotlight 5: Observer-Reporter Media Spotlight */}
+          <article className="highlight-spotlight-card">
+            <div className="spotlight-image-col">
+              <img 
+                src="/Content/Project_articles/News/Observer-Reporter.png" 
+                alt="Observer-Reporter feature on WeCare Street Outreach and Street Medicine at Pitt" 
+                loading="lazy"
+                className="featured-image-lower"
+                onError={(e) => { e.currentTarget.src = '/Content/Home/bridge.jpg'; }}
+              />
+            </div>
+            <div className="spotlight-text-col">
+              <span className="spotlight-badge">Media Spotlight • Observer-Reporter</span>
+              <h3>Regional Street Outreach &amp; Residency Training Grant</h3>
+              <p>
+                The <em>Observer-Reporter</em> published a feature spotlighting street outreach teams delivering essential medical care directly to unhoused community members across Southwestern Pennsylvania, including collaborations with Street Medicine at Pitt.
+              </p>
+              <p>
+                Supported by a <strong>five-year, $2.5 million grant</strong> to expand residency training in street medicine, Pitt is preparing family medicine and internal medicine residents to practice street medicine where patients are. As Medical Director <strong>Dr. Anna Marie White</strong> emphasized, the goal is to reinforce local networks and equip clinicians with the humility and skills to care for unsheltered neighbors in their own backyards.
+              </p>
+              <div className="spotlight-meta-box">
+                <strong>Publication:</strong> <em>Observer-Reporter</em> (October 17, 2026) by Karen Mansfield — &quot;WeCare Street Outreach team brings medical care to Washington&apos;s unhoused&quot;
+              </div>
+              <div style={{ marginTop: '20px' }}>
+                <a 
+                  href="/Content/Project_articles/News/Observer-Reporter-WeCare-Street-Outreach.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn btn-primary"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="12" y1="18" x2="12" y2="12"></line>
+                    <line x1="9" y1="15" x2="15" y2="15"></line>
+                  </svg>
+                  Read Full Article (PDF)
+                </a>
               </div>
             </div>
           </article>
